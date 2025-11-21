@@ -13,6 +13,7 @@ import { PostsService, Post } from '../../services/posts.service';
 export class PostsComponent implements OnInit {
 
   posts: Post[] = [];
+  selectedPost: Post | null = null;
   loading = true;
   userId: number | null = null;
 
@@ -23,23 +24,41 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.userId = +params['userId'];
+      this.userId = params['userId'] ? +params['userId'] : null;
 
       if (this.userId) {
-        this.loadPosts();
+        this.loadPostsByUser(this.userId);
+      } else {
+        this.loadAllPosts();
       }
     });
   }
 
-  loadPosts() {
-    this.postsService.getPostsByUser(this.userId!).subscribe({
-      next: data => {
-        this.posts = data;
+  loadAllPosts(): void {
+    this.postsService.getAllPosts().subscribe({
+      next: (posts: Post[]) => {
+        this.posts = posts;
         this.loading = false;
       },
-      error: () => {
-        this.loading = false;
-      }
+      error: () => this.loading = false
     });
+  }
+
+  loadPostsByUser(id: number): void {
+    this.postsService.getPostsByUser(id).subscribe({
+      next: (posts: Post[]) => {
+        this.posts = posts;
+        this.loading = false;
+      },
+      error: () => this.loading = false
+    });
+  }
+
+  openModal(post: Post) {
+    this.selectedPost = post;
+  }
+
+  closeModal() {
+    this.selectedPost = null;
   }
 }

@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class PromotionsComponent implements OnInit {
   // --- Wheel state ---
+  sectors = Array.from({ length: 10 }); // 10 slices
+
   inputSector: number | null = null;
   errorMessage = '';
   spinning = false;

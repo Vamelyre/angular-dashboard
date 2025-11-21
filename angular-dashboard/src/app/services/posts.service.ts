@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Define the Post type
 export interface Post {
   userId: number;
   id: number;
@@ -15,17 +14,17 @@ export interface Post {
 })
 export class PostsService {
 
-  private apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+  private apiUrl = 'https://jsonplaceholder.typicode.com';
 
   constructor(private http: HttpClient) {}
 
-  // Get all posts
-  getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.apiUrl);
+  // GET ALL POSTS (for navigation → Posts page)
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.apiUrl}/posts`);
   }
 
-  // Get posts by a specific user
+  // GET POSTS BY USER (for Users table → Posts)
   getPostsByUser(userId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.apiUrl}?userId=${userId}`);
+    return this.http.get<Post[]>(`${this.apiUrl}/posts?userId=${userId}`);
   }
 }

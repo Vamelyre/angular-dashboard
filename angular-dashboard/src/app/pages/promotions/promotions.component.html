@@ -1,1 +1,85 @@
-<p>promotions works!</p>
+<div class="promotions-page">
+
+  <h2 class="title">აქციები</h2>
+
+  <!-- ---------- Wheel ---------- -->
+  <section class="wheel-section">
+    <div class="wheel-card">
+      <h3>ბორბლის დატრიალება</h3>
+
+      <div class="wheel-area">
+        <div
+          class="wheel"
+          [style.transform]="'rotate(' + wheelRotation + 'deg)'"
+          [class.spinning]="spinning"
+        >
+          <!-- 10 sectors drawn with CSS: each is a slice -->
+         <ng-container *ngFor="let s of [1,2,3,4,5,6,7,8,9,10]; let i = index">
+  <div class="sector" [style.transform]="'rotate(' + (i * 36) + 'deg)'">
+    <span class="sector-label" 
+      [style.--i]="i">
+      {{ i + 1 }}
+</span>
+
+  </div>
+</ng-container>
+
+          <!-- center circle -->
+          <div class="wheel-center"></div>
+        </div>
+
+        <!-- fixed pointer at top -->
+        <div class="pointer">▼</div>
+      </div>
+
+      <div class="wheel-controls">
+        <input type="number" min="1" max="10" [(ngModel)]="inputSector" placeholder="1-10" />
+        <button (click)="spinWheel()" [disabled]="spinning">დაატრიალე</button>
+      </div>
+
+      <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div class="result" *ngIf="lastResultSector !== null">
+        ბოლო შედეგი: <strong>{{ lastResultSector }}</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- Leaderboard ---------- -->
+  <section class="leaderboard-section">
+    <div class="leaderboard-card">
+      <h3>ლიდერბორდი</h3>
+
+      <div class="filters">
+        <button
+          *ngFor="let w of weeks"
+          (click)="setFilter(w)"
+          [class.active]="activeFilter === w"
+        >
+          {{ w }}
+        </button>
+      </div>
+
+      <div class="lb-table">
+        <table>
+          <thead>
+            <tr>
+              <th>ადგილი</th>
+              <th>ლოგინი</th>
+              <th>კლიენტის ID</th>
+              <th>კვირა</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let it of visible">
+              <td>{{ it.place }}</td>
+              <td>{{ it.loginName }}</td>
+              <td>{{ it.customerId }}</td>
+              <td>{{ it.week }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div>

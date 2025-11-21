@@ -1,1 +1,37 @@
-<p>users works!</p>
+<div class="table-container">
+
+  <div class="search-box">
+    <input 
+      type="text" 
+      placeholder="მოძებნა..." 
+      [(ngModel)]="searchTerm" 
+      (input)="onSearch()">
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>სახელი</th>
+        <th>უსერი</th>
+        <th>იმეილი</th>
+        <th>კომპანია</th>
+        <th class="actions-col">მოქმედებები</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of filteredUsers">
+        <td data-label="სახელი">{{ user.name }}</td>
+        <td data-label="უსერი">{{ user.username }}</td>
+        <td data-label="იმეილი">{{ user.email }}</td>
+        <td data-label="კომპანია">{{ user.company?.name }}</td>
+
+        <td class="actions-col" data-label="მოქმედებები">
+          <button class="posts-btn" (click)="viewPosts(user.id)">პოსტები</button>
+          <button (click)="viewTodos(user.id)">დავალებები</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

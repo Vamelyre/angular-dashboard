@@ -1,1 +1,11 @@
-<p>todos works!</p>
+<div class="todos-container">
+  <h2>User {{ userId }} Todos</h2>
+
+  <div *ngIf="loading">Loading...</div>
+
+  <ul *ngIf="!loading">
+    <li *ngFor="let todo of todos" [ngClass]="{'completed': todo.completed}">
+      {{ todo.title }}
+    </li>
+  </ul>
+</div>

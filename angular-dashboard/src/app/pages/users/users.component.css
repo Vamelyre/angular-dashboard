@@ -1,0 +1,176 @@
+/* ---------- Layout Container ---------- */
+.table-container {
+  margin: 20px auto;
+  max-width: 1100px;
+  padding: 20px;
+}
+
+/* ---------- Table Styling ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* Header */
+thead {
+  background: #4285f4;
+  color: white;
+  text-align: left;
+}
+
+th, td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+/* ACTIONS COLUMN WIDER */
+th.actions-col,
+td.actions-col {
+  width: 220px;
+  white-space: nowrap;
+}
+
+/* Hover Row Effect */
+tr:hover {
+  background: #f9f9f9;
+}
+
+/* ---------- Buttons ---------- */
+button {
+  padding: 8px 14px;
+  background: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+  margin-right: 6px;
+}
+
+button:hover {
+  background: #2f6ad8;
+}
+
+/* ---------- Posts Button Animation ---------- */
+.posts-btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.posts-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.posts-btn:hover {
+  animation: pulse 0.6s ease-in-out;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.4);
+}
+
+.posts-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.4);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(66, 133, 244, 0.6);
+  }
+}
+
+/* ---------- Search Box ---------- */
+.search-box {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+input {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* ---------- MOBILE RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none; /* hide table header on mobile */
+  }
+
+  tr {
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    padding: 10px;
+  }
+
+  td {
+    border: none;
+    padding: 10px 0;
+    position: relative;
+    text-align: right;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    color: #555;
+  }
+
+  /* WIDER ACTION BUTTONS */
+  td.actions-col {
+    text-align: center;
+  }
+
+  button {
+    margin: 6px 4px;
+    width: 45%;
+  }
+}
+
+/* ---------- Cross-browser Consistency ---------- */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
